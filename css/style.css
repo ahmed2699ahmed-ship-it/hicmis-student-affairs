@@ -1,0 +1,367 @@
+* {
+    box-sizing: border-box;
+    font-family: 'Cairo', sans-serif;
+}
+
+:root {
+    --primary: #154360;
+    --primary-dark: #0e2f44;
+    --accent: #27ae60;
+    --danger: #c0392b;
+    --bg: #f0f4f8;
+    --card-bg: #ffffff;
+    --text: #2c3e50;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: var(--bg);
+    color: var(--text);
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* شاشة تسجيل الدخول */
+.login-wrapper {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #154360 0%, #1b4f72 100%);
+    padding: 20px;
+}
+
+.login-box {
+    background: #fff;
+    padding: 35px;
+    border-radius: 16px;
+    width: 100%;
+    max-width: 440px;
+    text-align: center;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+}
+
+.login-box h2 {
+    margin: 0 0 5px 0;
+    color: var(--primary);
+}
+
+.login-box p {
+    margin: 0 0 20px 0;
+    font-size: 13px;
+    color: #666;
+}
+
+.tab-btn {
+    flex: 1;
+    padding: 10px;
+    border-radius: 8px;
+    border: 2px solid #ccc;
+    background: #f4f6f7;
+    color: #333;
+    cursor: pointer;
+    font-weight: 700;
+    transition: 0.2s;
+}
+
+.tab-btn.active-tab {
+    border-color: var(--primary);
+    background: var(--primary);
+    color: #fff;
+}
+
+#login-form input {
+    width: 100%;
+    padding: 12px 15px;
+    margin-bottom: 15px;
+    border: 1px solid #ccd1d1;
+    border-radius: 8px;
+    font-size: 15px;
+}
+
+.error-msg {
+    color: var(--danger);
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.dev-card {
+    margin-top: 25px;
+    padding-top: 15px;
+    border-top: 1px dashed #ccc;
+    font-size: 12px;
+    color: #555;
+}
+
+/* الأزرار */
+.btn {
+    padding: 11px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 14px;
+    transition: 0.2s;
+}
+
+.btn-primary {
+    background: var(--primary);
+    color: #fff;
+}
+
+.btn-primary:hover {
+    background: var(--primary-dark);
+}
+
+.btn-success {
+    background: var(--accent);
+    color: #fff;
+}
+
+.btn-danger {
+    background: var(--danger);
+    color: #fff;
+}
+
+.btn-sm {
+    padding: 6px 12px;
+    font-size: 12px;
+}
+
+.btn-block {
+    width: 100%;
+}
+
+/* لوحة التحكم */
+.dashboard-container {
+    display: flex;
+    min-height: 100vh;
+}
+
+.sidebar {
+    width: 260px;
+    background: var(--primary);
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.sidebar-header {
+    padding: 25px 20px;
+    text-align: center;
+    background: var(--primary-dark);
+}
+
+.menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+}
+
+.menu ul li a {
+    display: block;
+    padding: 14px 22px;
+    color: #d6eaf8;
+    text-decoration: none;
+    font-weight: 600;
+    border-right: 4px solid transparent;
+    transition: 0.2s;
+}
+
+.menu ul li a:hover,
+.menu ul li a.active {
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    border-right-color: var(--accent);
+}
+
+.sidebar-footer {
+    padding: 20px;
+    background: var(--primary-dark);
+}
+
+.dev-card-small {
+    font-size: 11px;
+    color: #aed6f1;
+    margin-bottom: 12px;
+    text-align: center;
+}
+
+.main-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.top-header {
+    background: #fff;
+    padding: 18px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.header-titles h3 {
+    margin: 0;
+    font-size: 13px;
+    color: #7f8c8d;
+}
+
+.header-titles h2 {
+    margin: 3px 0 0 0;
+    font-size: 18px;
+    color: var(--primary);
+}
+
+.user-info {
+    background: #ebf5fb;
+    color: var(--primary);
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-weight: 700;
+    font-size: 14px;
+}
+
+.content-wrapper {
+    padding: 25px 30px;
+}
+
+.content-section, .student-section {
+    display: none;
+}
+
+.content-section.active, .student-section.active {
+    display: block;
+}
+
+.card {
+    background: var(--card-bg);
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+    margin-bottom: 25px;
+}
+
+.card h2 {
+    margin-top: 0;
+    font-size: 18px;
+    color: var(--primary);
+    border-bottom: 2px solid #f0f4f8;
+    padding-bottom: 10px;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.form-grid input, .form-grid select, .search-box, select {
+    padding: 11px 14px;
+    border: 1px solid #d5dbdb;
+    border-radius: 8px;
+    font-size: 14px;
+    width: 100%;
+}
+
+.flex-between {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.mt-15 {
+    margin-top: 15px;
+}
+
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.data-table th, .data-table td {
+    padding: 12px;
+    border-bottom: 1px solid #eaeded;
+    text-align: right;
+    font-size: 14px;
+}
+
+.data-table th {
+    background: #f8f9f9;
+    color: var(--primary);
+    font-weight: 700;
+}
+
+.badge {
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.badge-green {
+    background: #d4efdf;
+    color: #1e8449;
+}
+
+.badge-orange {
+    background: #fdebd0;
+    color: #b9770e;
+}
+
+.badge-red {
+    background: #fadbd8;
+    color: #922b21;
+}
+
+.profile-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.profile-item {
+    background: #f8f9f9;
+    padding: 15px;
+    border-radius: 8px;
+    border-right: 4px solid var(--primary);
+}
+
+.profile-item span {
+    display: block;
+    font-size: 12px;
+    color: #7f8c8d;
+}
+
+.profile-item strong {
+    font-size: 16px;
+    color: var(--text);
+}
+
+.certificate-box {
+    border: 2px solid #154360;
+    padding: 40px;
+    background: #fff;
+}
+
+@media print {
+    .sidebar, .no-print {
+        display: none !important;
+    }
+    .content-wrapper {
+        padding: 0;
+    }
+    .certificate-box {
+        border: none;
+        box-shadow: none;
+    }
+}

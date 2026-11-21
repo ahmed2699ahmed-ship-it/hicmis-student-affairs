@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>منظومة HICMIS الذكية لشؤون الطلاب والقيد الأكاديمي</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css?v=1">
+</head>
+<body>
+
+    <!-- شاشة تسجيل الدخول -->
+    <div id="login-screen" class="login-wrapper">
+        <div class="login-box">
+            <div class="logo-container">
+                <img src="logo.svg" alt="شعار معهد HICMIS" style="width: 130px; height: 130px; object-fit: contain; margin: 0 auto 15px; display: block; border-radius: 50%;">
+            </div>
+            <h2>بوابة شؤون الطلاب الإلكترونية</h2>
+            <p>وزارة التعليم العالي - المعهد العالي للحاسبات ونظم المعلومات الإدارية</p>
+            
+            <!-- أزرار التبديل بين الطالب والإدارة -->
+            <div style="display: flex; gap: 10px; margin-bottom: 20px;">
+                <button type="button" id="tab-student-btn" class="tab-btn active-tab">دخول الطلاب</button>
+                <button type="button" id="tab-admin-btn" class="tab-btn">دخول شؤون الطلاب (الإدارة)</button>
+            </div>
+
+            <form id="login-form">
+                <input type="text" id="username" placeholder="الكود الأكاديمي / رقم الكارنيه" required>
+                <input type="password" id="password" placeholder="الرقم القومي (14 رقم)" required>
+                <button type="submit" class="btn btn-primary btn-block">تسجيل دخول آمن</button>
+                <p id="login-error" class="error-msg" style="display: none;"></p>
+            </form>
+
+            <div class="dev-card">
+                تطوير وإعداد:<br>
+                <strong>أحمد ربيع &bull; نظم معلومات إدارية</strong><br>
+                الفرقة الثالثة - معهد HICMIS
+            </div>
+        </div>
+    </div>
+
+    <!-- لوحة تحكم إدارة شؤون الطلاب -->
+    <div id="admin-dashboard" class="dashboard-container hidden">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <svg viewBox="0 0 200 120" width="100" height="60">
+                    <polygon points="100,10 20,50 180,50" fill="#fff"/>
+                    <rect x="30" y="55" width="15" height="45" fill="#e8f8f5"/>
+                    <rect x="75" y="55" width="15" height="45" fill="#e8f8f5"/>
+                    <rect x="115" y="55" width="15" height="45" fill="#e8f8f5"/>
+                    <rect x="160" y="55" width="15" height="45" fill="#e8f8f5"/>
+                    <rect x="15" y="100" width="175" height="15" fill="#fff"/>
+                    <text x="100" y="42" font-family="Arial" font-weight="900" font-size="22" fill="#154360" text-anchor="middle">HICMIS</text>
+                </svg>
+            </div>
+            <nav class="menu">
+                <ul>
+                    <li><a href="#" class="active" data-target="sec-students">قيد وبيانات الطلاب</a></li>
+                    <li><a href="#" data-target="sec-grades">الكنترول ورصد الدرجات</a></li>
+                    <li><a href="#" data-target="sec-fees">الخزينة والمصروفات الدراسية</a></li>
+                    <li><a href="#" data-target="sec-certificates">استخراج إفادة قيد رسمية</a></li>
+                </ul>
+            </nav>
+            <div class="sidebar-footer">
+                <div class="dev-card-small">
+                    تطوير وإعداد:<br>
+                    <strong>أحمد ربيع</strong><br>
+                    الفرقة الثالثة - نظم معلومات
+                </div>
+                <button id="admin-logout-btn" class="btn btn-danger btn-block">تسجيل خروج</button>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <header class="top-header no-print">
+                <div class="header-titles">
+                    <h3>وزارة التعليم العالي</h3>
+                    <h2>إدارة شؤون الطلاب والخريجين - معهد HICMIS</h2>
+                </div>
+                <div class="user-info">مدير شؤون الطلاب (Admin)</div>
+            </header>
+
+            <div class="content-wrapper">
+                <!-- 1. قسم قيد وبيانات الطلاب -->
+                <section id="sec-students" class="content-section active">
+                    <div class="card">
+                        <h2>تسجيل طالب جديد / تحديث حالة قيد</h2>
+                        <form id="add-student-form" class="form-grid">
+                            <input type="text" id="st-cardId" placeholder="الكود الأكاديمي (مثال: 202410660)" required>
+                            <input type="text" id="st-nationalId" placeholder="الرقم القومي (14 رقم)" required pattern="\d{14}" maxlength="14">
+                            <input type="text" id="st-seatNumber" placeholder="رقم الجلوس" required>
+                            <input type="text" id="st-name" placeholder="اسم الطالب الرباعي" required>
+                            <select id="st-academicYear" required>
+                                <option value="" disabled selected>الفرقة الدراسية</option>
+                                <option value="الفرقة الأولى">الفرقة الأولى</option>
+                                <option value="الفرقة الثانية">الفرقة الثانية</option>
+                                <option value="الفرقة الثالثة">الفرقة الثالثة</option>
+                                <option value="الفرقة الرابعة">الفرقة الرابعة</option>
+                            </select>
+                            <select id="st-department" required>
+                                <option value="" disabled selected>الشعبة / التخصص</option>
+                                <option value="نظم معلومات إدارية">نظم معلومات إدارية</option>
+                                <option value="علوم حاسب">علوم حاسب</option>
+                                <option value="محاسبة">محاسبة</option>
+                                <option value="إدارة أعمال">إدارة أعمال</option>
+                            </select>
+                            <input type="text" id="st-phone" placeholder="رقم الهاتف" required>
+                            <select id="st-status" required>
+                                <option value="مقيد - مستجد">مقيد - مستجد</option>
+                                <option value="مقيد - منقول بمواد">مقيد - منقول بمواد</option>
+                                <option value="مقيد - باق للإعادة">مقيد - باق للإعادة</option>
+                                <option value="مؤجل التجنيد">مؤجل التجنيد</option>
+                                <option value="خريج">خريج</option>
+                            </select>
+                            <button type="submit" class="btn btn-primary" style="grid-column: 1 / -1;">حفظ بيانات الطالب في قاعدة البيانات</button>
+                        </form>
+                    </div>
+
+                    <div class="card">
+                        <div class="flex-between">
+                            <h2>سجل الطلاب المقيدين (<span id="total-students-count">0</span>)</h2>
+                            <input type="text" id="search-student-input" placeholder="بحث بالاسم أو الكود أو الرقم القومي..." class="search-box" style="max-width: 350px; margin:0;">
+                        </div>
+                        <table class="data-table mt-15">
+                            <thead>
+                                <tr>
+                                    <th>الكود الأكاديمي</th>
+                                    <th>رقم الجلوس</th>
+                                    <th>اسم الطالب</th>
+                                    <th>الفرقة</th>
+                                    <th>الشعبة</th>
+                                    <th>حالة القيد</th>
+                                    <th>الهاتف</th>
+                                    <th>إجراء</th>
+                                </tr>
+                            </thead>
+                            <tbody id="admin-students-tbody"></tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- 2. قسم الكنترول ورصد الدرجات -->
+                <section id="sec-grades" class="content-section">
+                    <div class="card">
+                        <h2>رصد درجات المقررات الدراسية</h2>
+                        <form id="add-grade-form" class="form-grid">
+                            <select id="gr-cardId" required>
+                                <option value="" disabled selected>اختر الطالب...</option>
+                            </select>
+                            <input type="text" id="gr-courseCode" placeholder="كود المقرر (مثال: MIS-301)" required>
+                            <input type="text" id="gr-courseName" placeholder="اسم المادة الدراسية" required>
+                            <input type="number" id="gr-maxGrade" placeholder="الدرجة العظمى (100)" value="100" required min="1">
+                            <input type="number" id="gr-studentGrade" placeholder="درجة الطالب" required min="0">
+                            <button type="submit" class="btn btn-primary" style="grid-column: 1 / -1;">اعتماد وحفظ النتيجة</button>
+                        </form>
+                    </div>
+
+                    <div class="card">
+                        <h2>سجل النتائج المرصودة</h2>
+                        <table class="data-table mt-15">
+                            <thead>
+                                <tr>
+                                    <th>الكود الأكاديمي</th>
+                                    <th>اسم الطالب</th>
+                                    <th>كود المقرر</th>
+                                    <th>المادة</th>
+                                    <th>الدرجة</th>
+                                    <th>التقدير</th>
+                                    <th>إجراء</th>
+                                </tr>
+                            </thead>
+                            <tbody id="admin-grades-tbody"></tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- 3. قسم الخزينة والمصروفات -->
+                <section id="sec-fees" class="content-section">
+                    <div class="card">
+                        <h2>تسجيل سداد المصروفات الدراسية</h2>
+                        <form id="add-fee-form" class="form-grid">
+                            <select id="fee-cardId" required>
+                                <option value="" disabled selected>اختر الطالب...</option>
+                            </select>
+                            <input type="text" id="fee-id" placeholder="رقم إيصال السداد (مثال: REC-2026-01)" required>
+                            <input type="text" id="fee-academicYear" placeholder="العام الدراسي (2026/2027)" value="2026/2027" required>
+                            <input type="number" id="fee-totalAmount" placeholder="إجمالي المصروفات المقررة" required min="0">
+                            <input type="number" id="fee-paidAmount" placeholder="المبلغ المسدد فعلياً" required min="0">
+                            <input type="date" id="fee-paymentDate" required>
+                            <button type="submit" class="btn btn-primary" style="grid-column: 1 / -1;">تسجيل الإيصال في الخزينة</button>
+                        </form>
+                    </div>
+
+                    <div class="card">
+                        <h2>سجل المدفوعات والموقف المالي</h2>
+                        <table class="data-table mt-15">
+                            <thead>
+                                <tr>
+                                    <th>رقم الإيصال</th>
+                                    <th>الطالب</th>
+                                    <th>العام الدراسي</th>
+                                    <th>المطلوب</th>
+                                    <th>المسدد</th>
+                                    <th>المتبقي</th>
+                                    <th>الحالة</th>
+                                    <th>إجراء</th>
+                                </tr>
+                            </thead>
+                            <tbody id="admin-fees-tbody"></tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- 4. قسم استخراج إفادة قيد رسمية للطباعة -->
+                <section id="sec-certificates" class="content-section">
+                    <div class="card no-print">
+                        <h2>استخراج وطباعة إفادة قيد رسمية</h2>
+                        <div style="display: flex; gap: 10px; margin-top: 15px;">
+                            <select id="cert-student-select" style="flex: 1;">
+                                <option value="" disabled selected>اختر الطالب لاستخراج الإفادة...</option>
+                            </select>
+                            <button type="button" onclick="generateCertificate()" class="btn btn-primary">عرض الإفادة</button>
+                            <button type="button" onclick="window.print()" class="btn btn-success">طباعة الإفادة (PDF / طابعة)</button>
+                        </div>
+                    </div>
+
+                    <div id="certificate-paper" class="card certificate-box hidden">
+                        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 3px solid #154360; padding-bottom: 15px;">
+                            <div>
+                                <h3 style="margin:0;">وزارة التعليم العالي</h3>
+                                <h2 style="margin:5px 0; color:#154360;">المعهد العالي للحاسبات ونظم المعلومات الإدارية</h2>
+                                <p style="margin:0; font-weight:bold;">إدارة شؤون الطلاب والخريجين</p>
+                            </div>
+                            <img src="logo.svg" alt="شعار المعهد" style="height: 85px;">
+                        </div>
+
+                        <h1 style="text-align: center; margin: 30px 0; text-decoration: underline; color: #154360;">إفــــادة قيــــد طـالــــب</h1>
+
+                        <div id="cert-body" style="font-size: 18px; line-height: 2.2; padding: 10px 20px;"></div>
+
+                        <div style="margin-top: 60px; display: flex; justify-content: space-between; text-align: center; font-weight: bold;">
+                            <div>
+                                <p>المختص بشؤون الطلاب</p>
+                                <p>............................</p>
+                            </div>
+                            <div>
+                                <p>مدير إدارة شؤون الطلاب</p>
+                                <p>............................</p>
+                            </div>
+                            <div>
+                                <p>يعتمد عميد المعهد</p>
+                                <p>............................</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <!-- ================= بوابة الطالب ================= -->
+    <div id="student-portal" class="dashboard-container hidden">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <svg viewBox="0 0 200 120" width="100" height="60">
+                    <polygon points="100,10 20,50 180,50" fill="#fff"/>
+                    <rect x="30" y="55" width="15" height="45" fill="#e8f8f5"/>
+                    <rect x="75" y="55" width="15" height="45" fill="#e8f8f5"/>
+                    <rect x="115" y="55" width="15" height="45" fill="#e8f8f5"/>
+                    <rect x="160" y="55" width="15" height="45" fill="#e8f8f5"/>
+                    <rect x="15" y="100" width="175" height="15" fill="#fff"/>
+                    <text x="100" y="42" font-family="Arial" font-weight="900" font-size="22" fill="#154360" text-anchor="middle">HICMIS</text>
+                </svg>
+            </div>
+            <nav class="menu" id="student-menu">
+                <ul>
+                    <li><a href="#" class="active" data-target="st-portal-profile">الملف الشخصي وحالة القيد</a></li>
+                    <li><a href="#" data-target="st-portal-grades">بيان الدرجات والنتائج</a></li>
+                    <li><a href="#" data-target="st-portal-fees">الموقف المالي والمصروفات</a></li>
+                </ul>
+            </nav>
+            <div class="sidebar-footer">
+                <button id="student-logout-btn" class="btn btn-danger btn-block">تسجيل خروج</button>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <header class="top-header">
+                <div class="header-titles">
+                    <h3>بوابة الطالب الأكاديمية</h3>
+                    <h2>المعهد العالي للحاسبات ونظم المعلومات الإدارية (HICMIS)</h2>
+                </div>
+                <div class="user-info" id="st-header-name">اسم الطالب</div>
+            </header>
+
+            <div class="content-wrapper">
+                <!-- 1. الملف الشخصي -->
+                <section id="st-portal-profile" class="student-section active">
+                    <div class="card" style="background: linear-gradient(135deg, #154360, #1f618d); color: white;">
+                        <h1 id="st-welcome-title" style="margin:0 0 10px 0;">مرحباً بك</h1>
+                        <p id="st-welcome-sub" style="margin:0; font-size: 18px;"></p>
+                    </div>
+                    <div class="card">
+                        <h2>بيانات القيد الأساسية</h2>
+                        <div id="st-profile-details" class="profile-grid"></div>
+                    </div>
+                </section>
+
+                <!-- 2. نتائج الطالب -->
+                <section id="st-portal-grades" class="student-section">
+                    <div class="card">
+                        <h2>كشف الدرجات والتقديرات</h2>
+                        <table class="data-table mt-15">
+                            <thead>
+                                <tr>
+                                    <th>كود المقرر</th>
+                                    <th>اسم المادة</th>
+                                    <th>الدرجة العظمى</th>
+                                    <th>درجتك</th>
+                                    <th>التقدير</th>
+                                </tr>
+                            </thead>
+                            <tbody id="st-grades-tbody"></tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- 3. مصروفات الطالب -->
+                <section id="st-portal-fees" class="student-section">
+                    <div class="card">
+                        <h2>بيان المصروفات الدراسية</h2>
+                        <table class="data-table mt-15">
+                            <thead>
+                                <tr>
+                                    <th>رقم الإيصال</th>
+                                    <th>العام الدراسي</th>
+                                    <th>إجمالي المصروفات</th>
+                                    <th>المبلغ المسدد</th>
+                                    <th>المتبقي</th>
+                                    <th>تاريخ السداد</th>
+                                    <th>الحالة</th>
+                                </tr>
+                            </thead>
+                            <tbody id="st-fees-tbody"></tbody>
+                        </table>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>

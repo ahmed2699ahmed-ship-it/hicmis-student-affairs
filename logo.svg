@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" width="300" height="300">
+  <circle cx="150" cy="150" r="142" fill="#ffffff" stroke="#154360" stroke-width="10"/>
+  <circle cx="150" cy="150" r="128" fill="none" stroke="#b7950b" stroke-width="4"/>
+  <polygon points="150,55 65,105 235,105" fill="#154360"/>
+  <rect x="75" y="110" width="150" height="8" fill="#b7950b"/>
+  <rect x="85" y="125" width="18" height="65" fill="#154360"/>
+  <rect x="122" y="125" width="18" height="65" fill="#154360"/>
+  <rect x="160" y="125" width="18" height="65" fill="#154360"/>
+  <rect x="197" y="125" width="18" height="65" fill="#154360"/>
+  <rect x="65" y="195" width="170" height="12" fill="#154360"/>
+  <text x="150" y="242" font-family="Arial, sans-serif" font-weight="900" font-size="36" fill="#154360" text-anchor="middle">HICMIS</text>
+  <text x="150" y="268" font-family="Cairo, Arial, sans-serif" font-weight="700" font-size="14" fill="#b7950b" text-anchor="middle">إدارة شؤون الطلاب</text>
+</svg>

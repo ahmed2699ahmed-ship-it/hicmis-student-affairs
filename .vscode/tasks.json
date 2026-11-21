@@ -1,0 +1,22 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Build & Run C++ Student Affairs Server (Windows)",
+            "type": "shell",
+            "command": "g++ -O3 server.cpp -o server.exe -lws2_32 && ./server.exe",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": ["$gcc"]
+        },
+        {
+            "label": "Build & Run C++ Student Affairs Server (Linux/Ubuntu)",
+            "type": "shell",
+            "command": "g++ -O3 server.cpp -o server && ./server",
+            "group": "build",
+            "problemMatcher": ["$gcc"]
+        }
+    ]
+}
