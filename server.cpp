@@ -126,7 +126,7 @@ int main() {
 
     cout << "====================================================================\n";
     cout << "   HICMIS Student Affairs Engine - High-Performance C++ Backend     \n";
-    cout << "   Author: Ahmed Rabie | Computer Systems & MIS                     \n";
+    cout << "   Author: Mennatullah Ragabtullah Ragab | Computer Systems & MIS                     \n";
     cout << "====================================================================\n";
     cout << " [*] C++ Core Engine: READY (Loaded: " << engine.getStudentsCount() << " Students, " 
          << engine.getGradesCount() << " Grades, " << engine.getFeesCount() << " Fee Records)\n";
